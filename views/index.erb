@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet Quick Start Guide Example</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+</head>
+<body>
+	<div id="map" style="width: 600px; height: 400px"></div>
+
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+	<script>
+
+		var map = L.map('map').locate({setView: true, maxZoom: 15})
+		var barLayer
+
+		map.on('dragend', function(e) {
+			if(barLayer){
+				clearBars()
+			}
+			getBars(placeBars)
+		})
+
+		L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+			maxZoom: 15,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+		}).addTo(map)
+
+		function getBars(callback) {
+			bounds = map.getBounds()
+			nelat = bounds._northEast.lat
+			nelng = bounds._northEast.lng
+			swlat = bounds._southWest.lat
+			swlng = bounds._southWest.lng
+			bars_url = "bars.json?sw_latitude="+swlat+"&sw_longitude="+swlng+"&ne_latitude="+nelat+"&ne_longitude="+nelng
+			$.getJSON(bars_url, callback)
+		}
+
+		function placeBars(response) {
+			bars = response.businesses
+			markers = _.map(bars, function(bar) {
+				lat = bar.location.coordinate.latitude
+				lng = bar.location.coordinate.longitude
+				marker = L.marker([lat,lng]).bindPopup(bar.name)
+				return marker
+			})
+			barLayer = L.layerGroup(markers)
+			barLayer.addTo(map)
+		}
+
+		function clearBars() {
+			barLayer.clearLayers()
+		}
+
+	</script>
+</body>
+</html>
