@@ -17,19 +17,15 @@
 	<script>
 
 		var map = L.map('map').locate({setView: true, maxZoom: 15})
-		var barLayer
-
-		map.on('dragend', function(e) {
-			if(barLayer){
-				clearBars()
-			}
-			getBars(placeBars)
-		})
-
 		L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
 			maxZoom: 15,
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
 		}).addTo(map)
+
+		var barLayer
+
+		map.on('dragend', resetBars)
+		map.on('zoomend', resetBars)
 
 		function getBars(callback) {
 			bounds = map.getBounds()
@@ -55,6 +51,13 @@
 
 		function clearBars() {
 			barLayer.clearLayers()
+		}
+
+		function resetBars(e) {
+			if(barLayer){
+				clearBars()
+			}
+			getBars(placeBars)
 		}
 
 	</script>
