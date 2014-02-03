@@ -27,7 +27,7 @@
 		map.on('dragend', resetBars)
 		map.on('zoomend', resetBars)
 
-		function getBars(callback) {
+		function getBarsFromMapBounds(callback) {
 			bounds = map.getBounds()
 			nelat = bounds._northEast.lat
 			nelng = bounds._northEast.lng
@@ -57,7 +57,7 @@
 			if(barLayer){
 				clearBars()
 			}
-			getBars(placeBars)
+			getBarsFromMapBounds(placeBars)
 		}
 
 	</script>
