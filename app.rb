@@ -11,6 +11,7 @@ configure do
 end
 
 get '/bars.json' do
+  response.headers['Content-Type'] = "application/json"
   #return [] unless [:sw_latitude, :sw_longitude, :ne_latitude, :ne_longitude].all? { |key| params.key?(key) }
   params[:category_filter] = "bars"
   request = Yelp::V2::Search::Request::BoundingBox.new(params)

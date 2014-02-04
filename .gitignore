@@ -1,0 +1,7 @@
+.env
+.bundle
+
+# @waltz's emacs gitignore partee pak
+*~
+.#*
+#~#
