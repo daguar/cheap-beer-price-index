@@ -33,16 +33,14 @@
 			nelng = bounds._northEast.lng
 			swlat = bounds._southWest.lat
 			swlng = bounds._southWest.lng
-			bars_url = "bars.json?sw_latitude="+swlat+"&sw_longitude="+swlng+"&ne_latitude="+nelat+"&ne_longitude="+nelng
+			bars_url = "bars.json?sw_latitude="+swlat+"&sw_longitude="+swlng+"&ne_latitude="+nelat+"&ne_longitude="+nelng//+"&center_latitude="+clat+"&center_longitude="
 			$.getJSON(bars_url, callback)
 		}
 
-		function placeBars(response) {
-			bars = response.businesses
-			markers = _.map(bars, function(bar) {
-				lat = bar.location.coordinate.latitude
-				lng = bar.location.coordinate.longitude
-				marker = L.marker([lat,lng]).bindPopup(bar.name)
+		function placeBars(bars_array) {
+			console.log(bars_array)
+			markers = _.map(bars_array, function(bar) {
+				marker = L.marker([bar.lat,bar.lng]).bindPopup(bar.name + ": " + bar.id)
 				return marker
 			})
 			barLayer = L.layerGroup(markers)
