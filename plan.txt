@@ -1,8 +1,0 @@
-For now, fuck it: just bulk-hit and store shit from Foursquare, then query against that
-
-
-Look in DB for bounding box
-	If <20 results, hit Foursquare
-		With result:
-			Display all DB + 4Quare results
-
