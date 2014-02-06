@@ -40,7 +40,11 @@
 		function placeBars(bars_array) {
 			console.log(bars_array)
 			markers = _.map(bars_array, function(bar) {
-				marker = L.marker([bar.lat,bar.lng]).bindPopup(bar.name + ": " + bar.id)
+				popup_text = bar.name
+				if(bar.beer) {
+					popup_text += " (" + bar.beer + ")"
+				}
+				marker = L.marker([bar.lat,bar.lng]).bindPopup(popup_text)
 				return marker
 			})
 			barLayer = L.layerGroup(markers)
