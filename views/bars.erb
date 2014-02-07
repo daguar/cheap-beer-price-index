@@ -1,0 +1,39 @@
+<h1><%= @bar["name"] %></h1>
+<form class="bar_form" name="input" action="/bars/<%= @bar["_id"] %>" method="post">
+	Brand:
+	<select name="beer">
+		<option value="PBR">PBR</option>
+		<option value="Olympia">Olympia</option>
+		<option value="Hamm's">Hamm's</option>
+	</select>
+	<br>
+	Or, another brand:
+	<br>
+	<input type="text" name="other-beer">
+	<br>
+	Draft?
+	<select name="draft">
+		<option value="Draft">Draft</option>
+		<option value="Can">Can</option>
+		<option value="Bottle">Bottle</option>
+	</select>
+	<br>
+	Price:
+	<select name="price-dollars">
+		<option value="0">$0</option>
+		<option value="1">$1</option>
+		<option value="2">$2</option>
+		<option value="3">$3</option>
+		<option value="4">$4</option>
+		<option value="5">$5</option>
+		<option value="6">$6</option>
+	</select>
+	<select name="price-cents">
+		<option value="0">.00</option>
+		<option value="25">.25</option>
+		<option value="50">.50</option>
+		<option value="75">.75</option>
+	</select>
+	<br>
+	<input type="submit" value="Submit">
+</form>

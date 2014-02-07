@@ -40,9 +40,11 @@
 		function placeBars(bars_array) {
 			console.log(bars_array)
 			markers = _.map(bars_array, function(bar) {
-				popup_text = bar.name
 				if(bar.beer) {
-					popup_text += " (" + bar.beer + ")"
+					popup_text = bar.name + " (" + bar.beer + ")"
+				}
+				else {
+					popup_text = "No data for " + bar.name + "!" + "<br><a href='/bars/" + bar._id + "'>" + "Help us by adding some!" + "</a>"
 				}
 				marker = L.marker([bar.lat,bar.lng]).bindPopup(popup_text)
 				return marker

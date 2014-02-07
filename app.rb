@@ -17,6 +17,10 @@ get '/pry' do
   binding.pry
 end
 
+get '/' do
+  erb :index
+end
+
 get '/bars.json' do
   bars_db = settings.db["bars"]
   map_sw = "#{params[:sw_latitude]},#{params[:sw_longitude]}"
@@ -44,8 +48,16 @@ get '/bars.json' do
   return_array.to_json
 end
 
-get '/' do
-  erb :index
+get '/bars/:id' do
+  bars_db = settings.db["bars"]
+  @bar = bars_db.find(:_id => params[:id]).to_a.first
+  # TODO: Catch if not found in DB
+  erb :bars
+end
+
+post '/bars/:id' do
+  puts "params: #{params}"
+  redirect to('/')
 end
 
 def set_beer_for_bar(id, beer_json)
