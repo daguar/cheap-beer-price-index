@@ -1,7 +1,9 @@
+<%= @bar %>
+
 <h1><%= @bar["name"] %></h1>
 <form class="bar_form" name="input" action="/bars/<%= @bar["_id"] %>" method="post">
 	Brand:
-	<select name="beer">
+	<select name="brand">
 		<option value="PBR">PBR</option>
 		<option value="Olympia">Olympia</option>
 		<option value="Hamm's">Hamm's</option>
@@ -9,7 +11,7 @@
 	<br>
 	Or, another brand:
 	<br>
-	<input type="text" name="other-beer">
+	<input type="text" name="other-brand">
 	<br>
 	Draft?
 	<select name="draft">
@@ -35,5 +37,11 @@
 		<option value="75">.75</option>
 	</select>
 	<br>
+	Comments:
+	<input type="text" name="comments">
+	<br>
 	<input type="submit" value="Submit">
 </form>
+<br>
+<br>
+<a href="/">Go back</a>

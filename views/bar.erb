@@ -1,0 +1,7 @@
+<h1><%= @bar["name"] %></h1>
+
+<% @bar["beer_data"].each_pair do |k,v| %>
+<li><%= "#{k}: #{v}" %></li>
+<% end %>
+<br>
+<a href="/">Go back</a>

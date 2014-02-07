@@ -40,8 +40,8 @@
 		function placeBars(bars_array) {
 			console.log(bars_array)
 			markers = _.map(bars_array, function(bar) {
-				if(bar.beer) {
-					popup_text = bar.name + " (" + bar.beer + ")"
+				if(bar.beer_data) {
+					popup_text = "<a href='/bars/" + bar._id + "'>" + bar.name + " ($" + bar.beer_data.price + " " + bar.beer_data.brand + ")</a><br>"
 				}
 				else {
 					popup_text = "No data for " + bar.name + "!" + "<br><a href='/bars/" + bar._id + "'>" + "Help us by adding some!" + "</a>"
